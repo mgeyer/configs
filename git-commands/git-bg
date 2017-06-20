@@ -1,0 +1,12 @@
+#!/bin/bash
+choices=$(git branch $2|grep -iE "$1"|sed 's/(no branch)//'|sed 's/*/ /'|sed -E 's/ +/ /'|sed 's/origin\///'|sed 's/remotes\///')
+n=$(grep -o " " <<<"$choices" | wc -l)
+[ $n -eq 0 ] && echo "No branch with that name" && exit 1
+[ $n -eq 1 ] && echo $choices && exit 0
+if [ $n -gt 1 ]; then
+  select branch in $choices
+  do
+    break;
+  done
+  echo $branch
+fi

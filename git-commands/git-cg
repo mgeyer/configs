@@ -1,0 +1,2 @@
+#!/bin/bash
+BRANCH=`git bg $1 $2` && git checkout $BRANCH || echo $BRANCH
